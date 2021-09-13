@@ -13,9 +13,11 @@ class Settings(BaseSettings):
    
     DATABASE_URL: Optional[str] = os.getenv("DATABASE_URL", DEV_DB)  
     
+    JWT_SECRET: str = "MonSecret"
 
     class Config:
         case_sensitive = True
+
 
 
 settings = Settings()

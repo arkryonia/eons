@@ -1,2 +1,8 @@
 fastapi==0.68.0
 uvicorn==0.12.2
+passlib==1.7.4
+tortoise-orm==0.17.7
+asyncpg==0.24.0
+bcrypt==3.2.0
+python-multipart==0.0.5
+ PyJWT==2.1.0

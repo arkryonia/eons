@@ -1,16 +1,13 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import as_declarative, declared_attr
-from sqlalchemy.orm import sessionmaker
+from tortoise.contrib.fastapi import register_tortoise
 
-from app.core.config import settings
+def init_db(app) -> register_tortoise:
+    
+    r = register_tortoise(
+        app,
+        db_url="sqlite://db.sqlite3",
+        modules={'models': ['app.users.models']},
+        generate_schemas=True,
+        add_exception_handlers=True,
+    )
 
-engine = create_engine(settings.DATABASE_URI, pool_pre_ping=True)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-
-@as_declarative()
-class Base:
-
-    @declared_attr
-    def __tablename__(cls) -> str:
-        return cls.__name__.lower()
+    return r
